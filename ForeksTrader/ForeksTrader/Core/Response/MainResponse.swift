@@ -7,22 +7,22 @@
 
 import Foundation
 
-struct MainResponse {
-    let mypageDefaults: [Element]?
-    let mypage: [List]?
+struct MainResponse: Codable {
+    let elements: [Element]?
+    let list: [List]?
     
     enum CodingKeys: String, CodingKey {
-        case element = "mypageDefaults"
-        case list = "mypage"
+        case list = "mypageDefaults"
+        case elements = "mypage"
     }
 }
 
-struct Element {
+struct Element: Codable {
     let name: String?
     let key: String?
 }
 
-struct List {
+struct List: Codable {
     let cod: String?
     let gro: String?
     let tke: String?
