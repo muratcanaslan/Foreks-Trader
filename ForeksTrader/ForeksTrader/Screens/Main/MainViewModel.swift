@@ -14,6 +14,7 @@ typealias OnTimer = () -> Void
 final class MainViewModel {
     
     var stocks = [Stock]()
+    var elements = [Element]()
     
     var cellVMs = [StockCellViewModel]()
     
@@ -24,14 +25,18 @@ final class MainViewModel {
     var onSuccess: OnSuccess?
     var onError: OnError?
     var onTimer: OnTimer?
-    
+    var leftTitle = "las"
+    private let rightTitle = "ddi"
+        
     func getList() {
         NetworkManager.shared.getDefaultPage { [weak self] response, error in
             if let stocks = response?.stocks {
                 self?.stocks = stocks
+                self?.elements = response?.elements ?? []
                 self?.setStcsParameters(with: stocks)
                 self?.onTimer?()
             } else if let error {
+                print(error.rawValue)
                 self?.onError?(error.rawValue)
             }
         }
@@ -42,7 +47,8 @@ final class MainViewModel {
         
         cellVMs = []
         
-        NetworkManager.shared.getDetailList(fields: "ddi,las", stcs: param) { [weak self] response, error in
+        let detailListRequestParameter = "\(leftTitle),\(rightTitle)"
+        NetworkManager.shared.getDetailList(fields: detailListRequestParameter, stcs: param) { [weak self] response, error in
             if let l = response?.l {
                 self?.setDetails(with: stock, l: l)
                 
@@ -50,6 +56,7 @@ final class MainViewModel {
                 
                 self?.onSuccess?()
             } else if let error {
+                print(error.rawValue)
                 self?.onError?(error.rawValue)
             }
         }
@@ -59,7 +66,7 @@ final class MainViewModel {
         if initial {
             l.forEach { item in
                 guard let stock = stock.first(where: { $0.tke == item.tke}) else { return }
-                self.cellVMs.append(.init(stock: stock, newValue: item, difference: "%0"))
+                self.cellVMs.append(.init(stock: stock, newValue: item, difference: "%0", price: item.las))
             }
         } else {
             l.forEach { item in
@@ -68,6 +75,8 @@ final class MainViewModel {
                 let oldLasValue = formatValues(value: oldValue?.las)
                 let newLasValue = formatValues(value: item.las)
                 let difference = ((newLasValue - oldLasValue)/oldLasValue)*100
+                let price = price(item: item)
+                
                 var isUp: Bool?
                 if difference < 0 {
                     isUp = false
@@ -76,13 +85,50 @@ final class MainViewModel {
                 } else {
                     isUp = nil
                 }
+                
                 let shouldHighlighted: Bool = oldValue?.clo != item.clo
-                self.cellVMs.append(.init(stock: stock, newValue: item, shouldHighlighted: shouldHighlighted, isUp: isUp, difference: "%\(difference.stringValue)"))
+                self.cellVMs.append(.init(stock: stock, newValue: item, shouldHighlighted: shouldHighlighted, isUp: isUp, difference: "%\(difference.stringValue)", price: price))
             }
         }
         
     }
     
+    private func price(item: L) -> String? {
+        let price: String?
+        if leftTitle == "las" {
+            price = item.las
+        }
+        else if leftTitle == "pdd" {
+            price = item.pdd
+        }
+        else if leftTitle == "ddi" {
+            price = item.ddi
+        }
+        else if leftTitle == "low" {
+            price = item.low
+        }
+        else if leftTitle == "hig" {
+            price = item.hig
+        }
+        else if leftTitle == "buy" {
+            price = item.buy
+        }
+        else if leftTitle == "sel" {
+            price = item.sel
+        }
+        else if leftTitle == "cei" {
+            price = item.cei
+        }
+        else if leftTitle == "flo" {
+            price = item.flo
+        }
+        else if leftTitle == "gco" {
+            price = item.gco
+        } else {
+            price = item.las
+        }
+        return price
+    }
     private func formatValues(value: String?) -> Float {
         guard let value else { return 0.0 }
         
@@ -110,20 +156,4 @@ private extension String {
 
 private extension Float {
     var stringValue: String { .init(format: "%1.2f", self) }
-}
-
-private extension String {
-    static let numberFormatter = NumberFormatter()
-    var doubleValue: Double {
-        String.numberFormatter.decimalSeparator = "."
-        if let result =  String.numberFormatter.number(from: self) {
-            return result.doubleValue
-        } else {
-            String.numberFormatter.decimalSeparator = ","
-            if let result = String.numberFormatter.number(from: self) {
-                return result.doubleValue
-            }
-        }
-        return 0
-    }
 }

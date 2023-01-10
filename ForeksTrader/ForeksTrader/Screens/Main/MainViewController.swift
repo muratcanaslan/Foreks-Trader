@@ -46,6 +46,29 @@ class MainViewController: UIViewController {
         viewModel.onTimer = { [weak self] in
             self?.startTimer()
         }
+        
+        headerView.leftAction = { [weak self] in
+            let alert = UIAlertController(title: "Seç", message: nil, preferredStyle: .actionSheet)
+            var actions: [UIAlertAction] = []
+            guard let self else { return }
+            for item in self.viewModel.elements {
+                let name = item.name
+                let action = UIAlertAction(title: name, style: .default) { [weak self] action in
+                    guard let self else { return }
+                    guard let title = action.title else { return }
+                    self.viewModel.leftTitle = item.key
+                    DispatchQueue.main.async {
+                        self.headerView.update(leftTitle: name)
+                    }
+                    self.timer?.invalidate()
+                    self.startTimer()
+                }
+                alert.addAction(action)
+                actions.append(action)
+            }
+            alert.addAction(.init(title: "Vazgeç", style: .cancel))
+            self.present(alert, animated: true)
+        }
     }
     
     private func startTimer() {

@@ -7,10 +7,14 @@
 
 import UIKit
 
+typealias Action = () -> Void
+
 class MainHeaderView: UIView {
+        
+    var leftAction: Action?
     
-    @IBOutlet weak var leftMenuButton: UIButton!
-    @IBOutlet weak var rightMenuButton: UIButton!
+    @IBOutlet weak var rightButton: UIButton!
+    @IBOutlet weak var leftButton: UIButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,15 +29,23 @@ class MainHeaderView: UIView {
     }
     
     private func applyStyling() {
-        leftMenuButton.layer.borderColor = UIColor.white.cgColor
-        rightMenuButton.layer.borderColor = UIColor.white.cgColor
+        leftButton.layer.borderColor = UIColor.white.cgColor
+        rightButton.layer.borderColor = UIColor.white.cgColor
         
-        leftMenuButton.layer.borderWidth = 1
-        rightMenuButton.layer.borderWidth = 1
+        leftButton.layer.borderWidth = 1
+        rightButton.layer.borderWidth = 1
         
-        leftMenuButton.layer.cornerRadius = 4
-        rightMenuButton.layer.cornerRadius = 4
+        leftButton.layer.cornerRadius = 4
+        rightButton.layer.cornerRadius = 4
         
+    }
+    
+    func update(leftTitle: String) {
+        leftButton.setTitle(leftTitle, for: .normal)
+    }
+    
+    @IBAction func didTapLeft(_ sender: UIButton) {
+        self.leftAction?()
     }
 }
 

@@ -32,7 +32,7 @@ final class StockCell: UITableViewCell {
         self.model = model
         stockName.text = model.stock?.cod
         percentage.text = model.difference
-        price.text = model.newValue?.las
+        price.text = model.price
         lastUpdateDate.text = model.newValue?.clo
         setLeftView()
         highlight()
@@ -77,6 +77,7 @@ class StockCellViewModel {
     var stock: Stock?
     var newValue: L?
     var shouldHighlighted: Bool?
+    var price: String?
     var isUp: Bool?
     var difference: String?
     
@@ -84,12 +85,14 @@ class StockCellViewModel {
          newValue: L?,
          shouldHighlighted: Bool? = nil,
          isUp: Bool? = nil,
-         difference: String? = nil
+         difference: String? = nil,
+         price: String?
     ) {
         self.stock = stock
         self.isUp = isUp
         self.newValue = newValue
         self.shouldHighlighted = shouldHighlighted
         self.difference = difference
+        self.price = price
     }
 }

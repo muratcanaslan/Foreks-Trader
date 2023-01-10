@@ -11,8 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainHeaderView" customModule="ForeksTrader" customModuleProvider="target">
             <connections>
-                <outlet property="leftMenuButton" destination="6Xp-BH-1E8" id="GUk-8H-8jL"/>
-                <outlet property="rightMenuButton" destination="ZUw-MG-B0h" id="qS8-ab-5Cs"/>
+                <outlet property="leftButton" destination="6Xp-BH-1E8" id="MqQ-82-QXz"/>
+                <outlet property="rightButton" destination="ZUw-MG-B0h" id="jc8-K3-eDa"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -37,6 +37,9 @@
                     <state key="normal" title="Son" image="iconDown">
                         <color key="titleColor" systemColor="systemBackgroundColor"/>
                     </state>
+                    <connections>
+                        <action selector="didTapLeft:" destination="-1" eventType="touchUpInside" id="VC1-Rt-ORp"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZUw-MG-B0h">
                     <rect key="frame" x="510" y="23.666666666666671" width="78" height="36"/>

@@ -28,3 +28,4 @@ struct Stock: Codable {
     let tke: String
     let def: String
 }
+
