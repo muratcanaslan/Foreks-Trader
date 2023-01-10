@@ -9,22 +9,22 @@ import Foundation
 
 struct MainResponse: Codable {
     let elements: [Element]?
-    let list: [List]?
+    let stocks: [Stock]?
     
     enum CodingKeys: String, CodingKey {
-        case list = "mypageDefaults"
+        case stocks = "mypageDefaults"
         case elements = "mypage"
     }
 }
 
 struct Element: Codable {
-    let name: String?
-    let key: String?
+    let name: String
+    let key: String
 }
 
-struct List: Codable {
-    let cod: String?
-    let gro: String?
-    let tke: String?
-    let def: String?
+struct Stock: Codable {
+    let cod: String
+    let gro: String
+    let tke: String
+    let def: String
 }

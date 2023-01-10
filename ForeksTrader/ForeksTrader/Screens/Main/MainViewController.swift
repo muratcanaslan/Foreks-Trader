@@ -10,21 +10,30 @@ import UIKit
 class MainViewController: UIViewController {
 
     //MARK: - Properties
-    private let tableView = UITableView()
+    private let tableView = UITableView(frame: .zero, style: .plain)
     private let viewModel = MainViewModel()
+    lazy var headerView = MainHeaderView(frame: .init(x: 0, y: 0, width: tableView.frame.width, height: 64))
+    
+    var timer: Timer?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()        
         
-        createTable()
-        setBlocks()
+        title = "Main"
+        view.backgroundColor = .dark()
         
+        createTable()
+        
+        setBlocks()
         viewModel.getList()
     }
     
+    //MARK: - Blocks
     func setBlocks() {
         viewModel.onSuccess = { [weak self] in
+            self?.viewModel.initial = false
+
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
@@ -33,6 +42,22 @@ class MainViewController: UIViewController {
         viewModel.onError = { [weak self] message in
             //TODO: - Show error message
         }
+        
+        viewModel.onTimer = { [weak self] in
+            self?.startTimer()
+        }
+    }
+    
+    private func startTimer() {
+        DispatchQueue.main.async {
+            self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { [weak self] _ in
+                self?.updateData()
+                })
+        }
+    }
+    
+    @objc func updateData() {
+        self.viewModel.getDetails(with: viewModel.stocks)
     }
 }
 
@@ -42,35 +67,32 @@ extension MainViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .red
+        tableView.separatorColor = .systemGray3
+        tableView.separatorInset = .init(top: 0, left: 0, bottom: 0, right: 0)
+        tableView.backgroundColor = .dark()
+        tableView.tableHeaderView = headerView
         tableView.tableFooterView = UIView(frame: .zero)
-        
+        tableView.register(StockCell.createXib(), forCellReuseIdentifier: StockCell.reuseIdentifier)
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }
 
 //MARK: - TableView Delegate&DataSource
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        viewModel.data.count
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.data[section].row.count
+        viewModel.cellVMs.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return .init()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: StockCell.reuseIdentifier, for: indexPath) as? StockCell else { return .init() }
+        cell.configure(with: viewModel.cellVMs[indexPath.row])
+        return cell
     }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return nil
-    }
-    
 }

@@ -68,6 +68,43 @@ final class NetworkManager {
         }
         task.resume()
     }
+    
+    func getDetailList(fields: String, stcs: String, completion: @escaping (DetailResponse?, NetworkError?) -> Void) {
+        var urlComponents = URLComponents(string: baseURLString + ForeksTarget.detail.path)
+        
+        urlComponents?.queryItems = [
+            URLQueryItem(name: "fields", value: fields),
+            URLQueryItem(name: "stcs", value: stcs)
+        ]
+        
+        guard let url = urlComponents?.url else { return }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let _ = error {
+                completion(nil, .connectionError)
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completion(nil, .responseError)
+                return
+            }
+            
+            guard let data = data else {
+                completion(nil, .decodeError)
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let response = try decoder.decode(DetailResponse.self, from: data)
+                completion(response, nil)
+            } catch {
+                completion(nil, .decodeError)
+            }
+        }
+        task.resume()
+        
+    }
     /*
      https://sui7963dq6.execute-api.eu-central-1.amazonaws.com/default/ForeksMobileInterview?fields=pdd,las&stcs=GARAN.E.BIST~XU100.I.BIST
      */

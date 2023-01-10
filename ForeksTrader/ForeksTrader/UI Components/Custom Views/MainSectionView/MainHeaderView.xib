@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainHeaderView" customModule="ForeksTrader" customModuleProvider="target">
+            <connections>
+                <outlet property="leftMenuButton" destination="6Xp-BH-1E8" id="GUk-8H-8jL"/>
+                <outlet property="rightMenuButton" destination="ZUw-MG-B0h" id="qS8-ab-5Cs"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="596" height="83"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sembol" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ENX-dR-jk5">
+                    <rect key="frame" x="16.000000000000004" y="31.333333333333329" width="51.333333333333343" height="20.666666666666671"/>
+                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Xp-BH-1E8">
+                    <rect key="frame" x="424" y="23.666666666666671" width="78" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="78" id="f0j-an-OzU"/>
+                        <constraint firstAttribute="height" constant="36" id="pbG-dI-lmd"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                    <inset key="imageEdgeInsets" minX="-8" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Son" image="iconDown">
+                        <color key="titleColor" systemColor="systemBackgroundColor"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZUw-MG-B0h">
+                    <rect key="frame" x="510" y="23.666666666666671" width="78" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="78" id="ErM-oi-D1f"/>
+                        <constraint firstAttribute="height" constant="36" id="YQo-rR-blq"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                    <inset key="imageEdgeInsets" minX="-8" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Fark" image="iconDown">
+                        <color key="titleColor" systemColor="secondarySystemBackgroundColor"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" name="dark"/>
+            <constraints>
+                <constraint firstItem="ENX-dR-jk5" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="0dZ-0Z-kVv"/>
+                <constraint firstItem="ZUw-MG-B0h" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="RWJ-Ku-FvP"/>
+                <constraint firstItem="ZUw-MG-B0h" firstAttribute="leading" secondItem="6Xp-BH-1E8" secondAttribute="trailing" constant="8" id="h8A-T2-4ZW"/>
+                <constraint firstItem="ENX-dR-jk5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="nsj-X6-9RC"/>
+                <constraint firstAttribute="trailing" secondItem="ZUw-MG-B0h" secondAttribute="trailing" constant="8" id="piB-36-aPr"/>
+                <constraint firstItem="6Xp-BH-1E8" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="uJN-VU-bxJ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="175.57251908396947" y="-220.77464788732397"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="iconDown" width="24" height="24"/>
+        <namedColor name="dark">
+            <color red="0.16078431372549021" green="0.16078431372549021" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

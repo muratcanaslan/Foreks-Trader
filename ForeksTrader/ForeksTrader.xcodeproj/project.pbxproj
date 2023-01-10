@@ -15,6 +15,10 @@
 		29AC328E296999A4009CA4C4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AC328D296999A4009CA4C4 /* NetworkManager.swift */; };
 		29AC32912969EB83009CA4C4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AC32902969EB83009CA4C4 /* MainViewController.swift */; };
 		29AC32932969ECD7009CA4C4 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AC32922969ECD7009CA4C4 /* MainViewModel.swift */; };
+		29AC3298296A13C5009CA4C4 /* StockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AC3296296A13C5009CA4C4 /* StockCell.swift */; };
+		29AC3299296A13C5009CA4C4 /* StockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29AC3297296A13C5009CA4C4 /* StockCell.xib */; };
+		29AC329C296C8089009CA4C4 /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AC329B296C8089009CA4C4 /* MainHeaderView.swift */; };
+		29AC329E296C8097009CA4C4 /* MainHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29AC329D296C8097009CA4C4 /* MainHeaderView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,10 @@
 		29AC328D296999A4009CA4C4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		29AC32902969EB83009CA4C4 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		29AC32922969ECD7009CA4C4 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		29AC3296296A13C5009CA4C4 /* StockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCell.swift; sourceTree = "<group>"; };
+		29AC3297296A13C5009CA4C4 /* StockCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StockCell.xib; sourceTree = "<group>"; };
+		29AC329B296C8089009CA4C4 /* MainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderView.swift; sourceTree = "<group>"; };
+		29AC329D296C8097009CA4C4 /* MainHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainHeaderView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +107,8 @@
 		29AC328429699443009CA4C4 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
+				29AC3295296A13AA009CA4C4 /* Custom Views */,
+				29AC3294296A13A5009CA4C4 /* Table Cell */,
 			);
 			path = "UI Components";
 			sourceTree = "<group>";
@@ -143,6 +153,32 @@
 				29AC32922969ECD7009CA4C4 /* MainViewModel.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		29AC3294296A13A5009CA4C4 /* Table Cell */ = {
+			isa = PBXGroup;
+			children = (
+				29AC3296296A13C5009CA4C4 /* StockCell.swift */,
+				29AC3297296A13C5009CA4C4 /* StockCell.xib */,
+			);
+			path = "Table Cell";
+			sourceTree = "<group>";
+		};
+		29AC3295296A13AA009CA4C4 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				29AC329A296C806F009CA4C4 /* MainSectionView */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		29AC329A296C806F009CA4C4 /* MainSectionView */ = {
+			isa = PBXGroup;
+			children = (
+				29AC329B296C8089009CA4C4 /* MainHeaderView.swift */,
+				29AC329D296C8097009CA4C4 /* MainHeaderView.xib */,
+			);
+			path = MainSectionView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,7 +239,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29AC329E296C8097009CA4C4 /* MainHeaderView.xib in Resources */,
 				29AC327A2969940D009CA4C4 /* LaunchScreen.storyboard in Resources */,
+				29AC3299296A13C5009CA4C4 /* StockCell.xib in Resources */,
 				29AC32772969940D009CA4C4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,9 +256,11 @@
 				29AC328E296999A4009CA4C4 /* NetworkManager.swift in Sources */,
 				29AC326E2969940D009CA4C4 /* AppDelegate.swift in Sources */,
 				29AC328A296997C0009CA4C4 /* MainResponse.swift in Sources */,
+				29AC3298296A13C5009CA4C4 /* StockCell.swift in Sources */,
 				29AC328C29699958009CA4C4 /* DetailResponse.swift in Sources */,
 				29AC32912969EB83009CA4C4 /* MainViewController.swift in Sources */,
 				29AC32932969ECD7009CA4C4 /* MainViewModel.swift in Sources */,
+				29AC329C296C8089009CA4C4 /* MainHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,7 +328,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -342,7 +382,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -366,7 +406,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -397,7 +437,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
