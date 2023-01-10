@@ -59,7 +59,7 @@ final class MainViewModel {
         if initial {
             l.forEach { item in
                 guard let stock = stock.first(where: { $0.tke == item.tke}) else { return }
-                self.cellVMs.append(.init(stock: stock, newValue: item, isUp: nil))
+                self.cellVMs.append(.init(stock: stock, newValue: item, difference: "%0"))
             }
         } else {
             l.forEach { item in
@@ -67,7 +67,7 @@ final class MainViewModel {
                 let oldValue = self.oldValues.first(where: { $0.tke == item.tke})
                 let oldLasValue = formatValues(value: oldValue?.las)
                 let newLasValue = formatValues(value: item.las)
-                let difference = newLasValue - oldLasValue
+                let difference = ((newLasValue - oldLasValue)/oldLasValue)*100
                 var isUp: Bool?
                 if difference < 0 {
                     isUp = false
@@ -77,7 +77,7 @@ final class MainViewModel {
                     isUp = nil
                 }
                 let shouldHighlighted: Bool = oldValue?.clo != item.clo
-                self.cellVMs.append(.init(stock: stock, newValue: item, shouldHighlighted: shouldHighlighted, isUp: isUp))
+                self.cellVMs.append(.init(stock: stock, newValue: item, shouldHighlighted: shouldHighlighted, isUp: isUp, difference: "%\(difference.stringValue)"))
             }
         }
         
@@ -104,11 +104,15 @@ final class MainViewModel {
 
 
 // MARK: - Casting
-extension String {
+private extension String {
     var floatValue: Float { Float(self) ?? 0.0 }
 }
 
-extension String {
+private extension Float {
+    var stringValue: String { .init(format: "%1.2f", self) }
+}
+
+private extension String {
     static let numberFormatter = NumberFormatter()
     var doubleValue: Double {
         String.numberFormatter.decimalSeparator = "."

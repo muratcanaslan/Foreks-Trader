@@ -31,7 +31,7 @@ final class StockCell: UITableViewCell {
     func configure(with model: StockCellViewModel) {
         self.model = model
         stockName.text = model.stock?.cod
-        percentage.text = model.newValue?.ddi
+        percentage.text = model.difference
         price.text = model.newValue?.las
         lastUpdateDate.text = model.newValue?.clo
         setLeftView()
@@ -78,14 +78,18 @@ class StockCellViewModel {
     var newValue: L?
     var shouldHighlighted: Bool?
     var isUp: Bool?
+    var difference: String?
     
     init(stock: Stock?,
          newValue: L?,
          shouldHighlighted: Bool? = nil,
-         isUp: Bool?) {
+         isUp: Bool? = nil,
+         difference: String? = nil
+    ) {
         self.stock = stock
         self.isUp = isUp
         self.newValue = newValue
         self.shouldHighlighted = shouldHighlighted
+        self.difference = difference
     }
 }
